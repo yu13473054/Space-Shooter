@@ -10,14 +10,27 @@ public class Boundary
 public class PlayerControl : MonoBehaviour
 {
 	private Rigidbody playerRb;
+	private float nextFire;
+
 	public float speed;
 	public Boundary boundary;
 	public float tilt;
+	public GameObject shot;
+	public Transform spotSpawn;
+	public float fireRate ;
 
 	void Start ()
 	{
 		playerRb = GetComponent<Rigidbody> ();
 	}
+
+	void Update(){
+		if(Input.GetButton("Fire1") && Time.time>nextFire){
+			nextFire = Time.time + fireRate;
+			Instantiate (shot,spotSpawn.position,spotSpawn.rotation);
+		}
+	}
+
 
 	void FixedUpdate ()
 	{
