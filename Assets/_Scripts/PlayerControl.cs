@@ -11,6 +11,7 @@ public class PlayerControl : MonoBehaviour
 {
 	private Rigidbody playerRb;
 	private float nextFire;
+    private AudioSource boltFireAudio;
 
 	public float speed;
 	public Boundary boundary;
@@ -22,12 +23,14 @@ public class PlayerControl : MonoBehaviour
 	void Start ()
 	{
 		playerRb = GetComponent<Rigidbody> ();
+        boltFireAudio = GetComponent<AudioSource>();
 	}
 
 	void Update(){
 		if(Input.GetButton("Fire1") && Time.time>nextFire){
 			nextFire = Time.time + fireRate;
 			Instantiate (shot,spotSpawn.position,spotSpawn.rotation);
+            boltFireAudio.Play();
 		}
 	}
 
